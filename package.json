@@ -1,0 +1,25 @@
+
+{
+  "name": "react-native-square-paysdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Ioannis Kokkinidis",
+    "email": "sudoplz@gmail.com",
+    "url": "https://www.linkedin.com/in/sudoplz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SudoPlz/react-native-square-paysdk.git"
+  },
+  "license": "",
+  "peerDependencies": {
+    "react-native": ">=0.40"
+  },
+}

@@ -1,0 +1,64 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.3.1'
+    }
+
+
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        // minSdkVersion 19 needed by square sdk
+        minSdkVersion 19
+        // targetSdkVersion 25 needed by square sdk
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+    // Dex options needed by square sdk
+    dexOptions {
+        preDexLibraries  true
+        jumboMode  true
+        keepRuntimeAnnotatedClasses false
+    }
+}
+
+repositories {
+    mavenCentral()
+    // Repositories below are needed by square sdk
+
+    maven {
+        credentials {
+            // Set in ~/.gradle/gradle.properties (DON'T forget to set this)
+            username SQUARE_USERNAME // Repository username provided by Square
+            password SQUARE_PASSWORD // Repository password provided by Square
+        }
+        url "https://squarepaysdk.jfrog.io/squarepaysdk/paysdk"
+    }
+    maven {
+        url "https://maven.google.com"
+    }
+}
+
+dependencies {
+    compile 'com.facebook.react:react-native:+'
+    compile ('com.squareup.paysdk:paysdk:1.0-beta3') {
+        exclude group: 'com.google.android.gms', module: 'play-services-base'
+        exclude group: 'com.google.android.gms', module: 'play-services-safetynet'
+    }
+}
+  
