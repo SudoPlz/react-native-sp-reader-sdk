@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3E7B58A1CC2AC0600A0062D /* RNReactNativeSquarePaysdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNReactNativeSquarePaysdk.m */; };
+		722A4404212EFC54003184F1 /* RCTACPaymentDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 722A4400212EFC54003184F1 /* RCTACPaymentDelegate.m */; };
+		722A4405212EFC54003184F1 /* RCTACReaderSettingsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 722A4401212EFC54003184F1 /* RCTACReaderSettingsDelegate.m */; };
+		722A4406212EFC54003184F1 /* RCTACSquareSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 722A4403212EFC54003184F1 /* RCTACSquareSDK.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,8 +26,12 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNReactNativeSquarePaysdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNReactNativeSquarePaysdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3E7B5881CC2AC0600A0062D /* RNReactNativeSquarePaysdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNReactNativeSquarePaysdk.h; sourceTree = "<group>"; };
-		B3E7B5891CC2AC0600A0062D /* RNReactNativeSquarePaysdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNReactNativeSquarePaysdk.m; sourceTree = "<group>"; };
+		722A43FE212EFC53003184F1 /* RCTACPaymentDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTACPaymentDelegate.h; path = ../../../Development/Acuity/mobile/ios/AcuityApp/Payments/SquareSDK/RCTACPaymentDelegate.h; sourceTree = "<group>"; };
+		722A43FF212EFC54003184F1 /* RCTACReaderSettingsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCTACReaderSettingsDelegate.h; path = ../../../Development/Acuity/mobile/ios/AcuityApp/Payments/SquareSDK/RCTACReaderSettingsDelegate.h; sourceTree = "<group>"; };
+		722A4400212EFC54003184F1 /* RCTACPaymentDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTACPaymentDelegate.m; path = ../../../Development/Acuity/mobile/ios/AcuityApp/Payments/SquareSDK/RCTACPaymentDelegate.m; sourceTree = "<group>"; };
+		722A4401212EFC54003184F1 /* RCTACReaderSettingsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCTACReaderSettingsDelegate.m; path = ../../../Development/Acuity/mobile/ios/AcuityApp/Payments/SquareSDK/RCTACReaderSettingsDelegate.m; sourceTree = "<group>"; };
+		722A4402212EFC54003184F1 /* RCTACSquareSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTACSquareSDK.h; sourceTree = "<group>"; };
+		722A4403212EFC54003184F1 /* RCTACSquareSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTACSquareSDK.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +56,12 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				B3E7B5881CC2AC0600A0062D /* RNReactNativeSquarePaysdk.h */,
-				B3E7B5891CC2AC0600A0062D /* RNReactNativeSquarePaysdk.m */,
+				722A43FE212EFC53003184F1 /* RCTACPaymentDelegate.h */,
+				722A4400212EFC54003184F1 /* RCTACPaymentDelegate.m */,
+				722A43FF212EFC54003184F1 /* RCTACReaderSettingsDelegate.h */,
+				722A4401212EFC54003184F1 /* RCTACReaderSettingsDelegate.m */,
+				722A4402212EFC54003184F1 /* RCTACSquareSDK.h */,
+				722A4403212EFC54003184F1 /* RCTACSquareSDK.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,7 +122,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* RNReactNativeSquarePaysdk.m in Sources */,
+				722A4405212EFC54003184F1 /* RCTACReaderSettingsDelegate.m in Sources */,
+				722A4406212EFC54003184F1 /* RCTACSquareSDK.m in Sources */,
+				722A4404212EFC54003184F1 /* RCTACPaymentDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

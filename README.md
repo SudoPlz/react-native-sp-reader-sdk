@@ -1,7 +1,5 @@
 
-# react-native-square-paysdk
-
-## This native module won't work until square releases their sdk to the public
+# react-native-square-readerSDK
 
 
 ## Dependencies
@@ -10,13 +8,16 @@
 
 ## Installation
 
-`npm i react-native-square-paysdk --save`
+`npm i react-native-square-readerSDK --save`
+
+
 
 #### iOS installation
 
-1. Add the following line to your "Podfile": `pod 'react-native-square-paysdk', path: '../node_modules/react-native-square-paysdk'`
+1. Add the following line to your "Podfile": `pod 'react-native-square-readerSDK', path: '../node_modules/react-native-square-readerSDK'`
 2. run `pod install`
-3. Run your project (`Cmd+R`)
+3. Follow all the instructions needed to install ReaderSDK both for [iOS](https://docs.connect.squareup.com/payments/readersdk/setup-ios)
+
 
 
 
@@ -26,7 +27,7 @@
   - Add 
 
     ```java
-    import com.sudoplz.rnsquarepaysdk.RNReactNativeSquarePaysdkPackage;
+    import com.sudoplz.rnsquarereaderSDK.RNReactNativeSquarereaderSDKPackage;
     ```
 
    to the imports at the top of the file.
@@ -34,7 +35,7 @@
   - Add 
 
     ```java
-    new RNReactNativeSquarePaysdkPackage(),
+    new RNReactNativeSquarereaderSDKPackage(),
     ``` 
 
   to the list returned by the `getPackages()` method
@@ -42,24 +43,26 @@
 2. Append the following lines to `android/settings.gradle`:
 
     ```gradle
-    include ':react-native-square-paysdk'
-    project(':react-native-square-paysdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-square-paysdk/android')
+    include ':react-native-square-readerSDK'
+    project(':react-native-square-readerSDK').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-square-readerSDK/android')
     ```
 
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
 
     ```gradle
-    compile 'com.square:pay-sdk:latest' // native sdk of paySDK (once it goes live)
-    compile project(':react-native-square-paysdk') // our react-native module
+    compile 'com.square:pay-sdk:latest' // native sdk of readerSDK (once it goes live)
+    compile project(':react-native-square-readerSDK') // our react-native module
     ```
 
 ...
+
+4. Follow all the instructions needed to install ReaderSDK for [Android](https://docs.connect.squareup.com/payments/readersdk/setup-android)
 
 ## Usage 
 
   ```javascript
 
-  import PaySDK from 'react-native-square-paysdk';
+  import ReaderSDK from 'react-native-square-readerSDK';
 
   ```
 
@@ -70,51 +73,50 @@
 class testApp extends Component {
   constructor() {
     super();
-   const paySdk = new PaySDK();
-   
-   paySdk.initWithKey("YOUR-AMPLITUDE-KEY").then();
+    const readerSdk = new ReaderSDK();
 
-   // figure if the sdk has been initialised
-   paySdk.hasInit().then((hasInit) => {
 
-   });
+    // initialize the sdk
+    readerSdk.initSdk();
 
-   // login with device code
-   paySdk.loginWithDeviceCode("1234567").then(() => {
+
+    // login with an auth code
+    readerSDK.authorizeWithCode("1234567").then(() => {
       // success
-   }).catch((err) => {
+    }).catch((err) => {
       // failure
-   })
+    })
 
-   // find out if logged in
-   paySdk.isLoggedIn().then();
-   
+    // find out if already logged into readerSDK
+    const isLoggedIn = await readerSdk.isLoggedIn();
 
-   // set the tender type
-   paySdk.setTenderType(
-      PaySDK.TenderTypes.READER_ONLY + PaySDK.TenderTypes.KEYED_IN_CARD,
-   );
 
-   // set other settings
-   paySdk.setFlowConfig(
+    // set other settings
+    readerSDK.setCheckoutParameters(
+      ReaderSDK
+        .AdditionalPaymentTypes
+        .MANUAL_CARD_ENTRY, // additional payment types
       null, // tip percentages arr
-      false, // tips enabled
+      tipsEnabled, // tips enabled
       false, // custom tip field visible
       false, // separate tip screen visible
       true, // skip receipt
-      true, // skip signature
+      false, // always require signature
       false, // allow split tender
     );
 
     // present the settings screen
-    paySdk.presentNewReaderScreenWithAnimation(
+    readerSDK.presentReaderSettingsScreen(
       true, // animate modal window
     );
 
     // find out if logged in
-    const isLoggedIn = paySdk.isLoggedIn().then();
+    const isLoggedIn = readerSDK.isLoggedIn()
+      .then(isLoggedIn => {
+        // isLoggedIn is either true or false
+      });
 
-    paySdk.requestPermissions() // so try asking for permissions (needed for iOS)
+    readerSDK.requestPermissions() // so try asking for permissions (needed for iOS)
       .then((permissions) => {
         if (permissions != null) {
           let permissionsGranted;
@@ -124,38 +126,38 @@ class testApp extends Component {
               deviceLocationEnabled,
               appRecordingPermission,
             } = permissions;
+            // do sth?
           }
         }
       });
 
-     paySdk.transactionRequestWithCentsAmount(
+     readerSDK.checkoutWithAmount(
         100, // amount to pay (in cents)
-        'This is a transaction',
-        12345, // customer ID
+        'This is a transaction', // transaction notes
       ).then((result) => { // transactionRequestWithCentsAmount success
-        /*
-        {
-            "transaction": {
-                "serverID": "yada yada yada",
-                "locationID": "18K68ZJ8PZF1T",
-                "order": {
-                    "totalMoneyAmount": 100,
-                    "totalTaxMoneyCurrency": "USD",
-                    "totalTaxMoneyAmount": 0,
-                    "totalTipMoneyCurrency": "USD",
-                    "totalMoneyCurrency": "USD",
-                    "totalTipMoneyAmount": 0
-                },
-                "tenderCnt": 1,
-                "clientID": "95B801E7-522A-44D9-BD1C-6B975316F9AB",
-                "createdAt": "2018-03-21T17:35:13-04:00"
-            }
-        }
-        */
+         /*
+          {
+              "transaction": {
+                createdAt:"2018-07-25T18:13:02+03:00"
+                locationID:"18K28ZA1PZF1T"
+                tenderCnt:1
+                totalMoneyAmount:115 (in cents, aka 1,15$)
+                totalMoneyCurrency:"USD"
+                totalTipMoneyAmount:15 (in cents, aka 0,15$)
+                totalTipMoneyCurrency:"USD"
+                transactionClientID:"EE8E7FF7-D16E-4350-91AD-47F2S6C7B447"
+                transactionID:"Wo5JKw2fOp7dfwai7Gv3FlO14D9eV"
+              }
+          }
+          */
 
         // Do something with the result
+      })
+      .catch((e) => { // checkoutWithAmount error
       });
-  }
+
+      readerSDK.deauthorize(); // logout
+    }
   ...
 }
 ```

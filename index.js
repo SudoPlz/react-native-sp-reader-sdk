@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-properties, no-caller */
+import {
+  // findNodeHandle,
+  NativeModules,
+} from 'react-native';
 
-import { NativeModules } from 'react-native';
-
-
-const { RNReactNativeSquarePaysdk } = NativeModules;
+const { ACSquareSDK } = NativeModules;
 
 
 function SquareSDKModule() { // es5 singleton
@@ -16,11 +17,11 @@ function SquareSDKModule() { // es5 singleton
 
   this.hasInitialized = false;
 
-  this.initWithKey =
-    function initWithKey(key) {
-      if (this.hasInitialized !== true && key != null) {
+  this.initSdk =
+    function initSdk() {
+      if (/* __DEV__ != true &&  */this.hasInitialized !== true) {
         this.hasInitialized = true;
-        return RNReactNativeSquarePaysdk.initWithApplicationID(key);
+        return ACSquareSDK.initSdk();
       }
       return Promise.resolve();
     };
@@ -28,72 +29,79 @@ function SquareSDKModule() { // es5 singleton
   this.hasInit =
     function hasInit() {
       if (this.hasInitialized) {
-        return RNReactNativeSquarePaysdk.hasInit().then(res => res.hasInit);
+        return ACSquareSDK.hasInit().then(res => res.hasInit);
       }
       return Promise.resolve(false);
     };
 
   this.requestPermissions =
     function requestPermissions() {
-      return RNReactNativeSquarePaysdk.requestPermissions();
+      return ACSquareSDK.requestPermissions();
     };
 
   this.isLoggedIn =
     function isLoggedIn() {
-      return RNReactNativeSquarePaysdk.isLoggedIn().then(res => res.isLoggedIn);
+      return ACSquareSDK.isLoggedIn().then(res => res.isLoggedIn);
     };
 
-  this.loginWithDeviceCode =
-    function loginWithDeviceCode(deviceCode) {
-      return RNReactNativeSquarePaysdk.loginWithDeviceCode(deviceCode);
+  this.authorizeWithCode =
+    function authorizeWithCode(deviceCode) {
+      return ACSquareSDK.authorizeWithCode(deviceCode);
     };
 
-  this.logout =
-    function logout() {
-      return RNReactNativeSquarePaysdk.logout();
+  this.deauthorize =
+    function deauthorize() {
+      return ACSquareSDK.deauthorize();
     };
 
-  this.transactionRequestWithCentsAmount =
-    function transactionRequestWithCentsAmount(cents, note, customerId) {
-      return RNReactNativeSquarePaysdk.transactionRequestWithCentsAmount(cents, note, customerId);
+  this.checkoutWithAmount =
+    function checkoutWithAmount(cents, note) {
+      return ACSquareSDK.checkoutWithAmount(cents, note || '');
     };
 
-  this.presentNewReaderScreenWithAnimation =
-    function presentNewReaderScreenWithAnimation(animated = true) {
-      return RNReactNativeSquarePaysdk.presentNewReaderScreenWithAnimation(animated);
+  this.getAuthorizedLocation =
+    function getAuthorizedLocation() {
+      return ACSquareSDK.getAuthorizedLocation();
     };
 
-  this.setFlowConfig = function setFlowConfig(
+  this.presentReaderSettingsScreen =
+    function presentReaderSettingsScreen() {
+      return ACSquareSDK.presentReaderSettingsScreen();
+    };
+
+  this.setCheckoutParameters = function setCheckoutParameters(
+    additionalPaymentTypes,
     tipPercentages,
     tipsEnabled = true,
     customTipFieldVisible = false,
     separateTipScreenVisible = false,
-    skipReceipt = true,
-    skipSignature = true,
-    allowSplitTender = false) {
-    return RNReactNativeSquarePaysdk.setFlowConfig(
+    skipReceipt = false,
+    alwaysRequireSignature = false,
+    allowSplitTender = false,
+  ) {
+    return ACSquareSDK.setCheckoutParameters(
       tipsEnabled,
       customTipFieldVisible,
       tipPercentages,
       separateTipScreenVisible,
       skipReceipt,
-      skipSignature,
+      alwaysRequireSignature,
       allowSplitTender,
-    );
+      additionalPaymentTypes || 0,
+    ).catch((e) => {
+      // eslint-disable-next-line
+      console.log(`ACSquareSDK.setCheckoutParameters err: ${e}`);
+    });
   };
 
-  this.setTenderType = function setTenderType(tenderType) {
-    return RNReactNativeSquarePaysdk.setTenderType(tenderType);
-  };
+  // this.setTenderType = function setTenderType(tenderType) {
+  //   return ACSquareSDK.setTenderType(tenderType);
+  // };
 }
 
-SquareSDKModule.TenderTypes = {
-  ALL: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeAll,
-  READER_ONLY: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeCardFromReader,
-  KEYED_IN_CARD: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeKeyedInCard,
-  CASH: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeCash,
-  OTHER: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeOther,
-  GIFT_CARD: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeSquareGiftCard,
-  CARD_ON_FILE: RNReactNativeSquarePaysdk.PaySDKTransactionRequestTenderTypeCardOnFile,
+SquareSDKModule.AdditionalPaymentTypes = {
+  MANUAL_CARD_ENTRY: ACSquareSDK.SQRDAdditionalPaymentTypeManualCardEntry,
+  CASH: ACSquareSDK.SQRDAdditionalPaymentTypeCash,
+  OTHER: ACSquareSDK.SQRDAdditionalPaymentTypeOther,
 };
 module.exports = SquareSDKModule;

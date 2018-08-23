@@ -11,11 +11,11 @@
 #import "RCTACPaymentDelegate.h"
 #import "RCTACReaderSettingsDelegate.h"
 
-@import SquarePaymentSDK;
+@import SquareReaderSDK;
 
-@interface RNReactNativeSquarePaysdk : NSObject <RCTBridgeModule, CLLocationManagerDelegate>
-@property (strong, nonatomic) SQRDReaderSDK* paySDK;
-@property (strong, nonatomic) SQRDCheckoutParameters* defaultPaymentParams;
-@property (strong, nonatomic) NSString* createdAtDateFormat;
+@interface RCTACSquareSDK :  NSObject <RCTBridgeModule, CLLocationManagerDelegate>
+  @property (strong, nonatomic) SQRDReaderSDK* paySDK;
+  @property (strong, nonatomic) SQRDCheckoutParameters* defaultPaymentParams;
+  @property (strong, nonatomic) NSString* createdAtDateFormat;
 + (BOOL)requiresMainQueueSetup;
 @end

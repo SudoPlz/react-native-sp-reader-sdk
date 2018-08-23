@@ -18,9 +18,9 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        // minSdkVersion 19 needed by square sdk
+        // minSdkVersion 19 needed by reader sdk
         minSdkVersion 19
-        // targetSdkVersion 25 needed by square sdk
+        // targetSdkVersion 25 needed by reader sdk
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -29,7 +29,7 @@ android {
         abortOnError false
     }
 
-    // Dex options needed by square sdk
+    // Dex options needed by reader sdk
     dexOptions {
         preDexLibraries  true
         jumboMode  true
@@ -37,17 +37,26 @@ android {
     }
 }
 
+def getEnvValueForKey = { keyStr ->
+    // if (System.getenv()["CI"]) {
+    //     // environmental variable
+    //     return System.getenv()[keyStr];
+    // }
+    // Set in ~/.gradle/gradle.properties
+    return this.getProperties().getOrDefault(keyStr, null)
+}
+
 repositories {
     mavenCentral()
-    // Repositories below are needed by square sdk
+    // Repositories below are needed by reader sdk
 
     maven {
         credentials {
             // Set in ~/.gradle/gradle.properties (DON'T forget to set this)
-            username SQUARE_USERNAME // Repository username provided by Square
-            password SQUARE_PASSWORD // Repository password provided by Square
+            username getEnvValueForKey("SQUARE_REPO_USERNAME") // Repository username provided by Square
+            password getEnvValueForKey("SQUARE_REPO_PASSWORD") // Repository password provided by Square
         }
-        url "https://squarepaysdk.jfrog.io/squarepaysdk/paysdk"
+        url "https://sdk.squareup.com/android"
     }
     maven {
         url "https://maven.google.com"
@@ -56,9 +65,8 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile ('com.squareup.paysdk:paysdk:1.0-beta3') {
-        exclude group: 'com.google.android.gms', module: 'play-services-base'
-        exclude group: 'com.google.android.gms', module: 'play-services-safetynet'
-    }
+    implementation ("com.squareup.sdk.reader:reader-sdk-${getEnvValueForKey("SQUARE_REPO_USERNAME")}:1.0.1")
+
+    runtimeOnly 'com.squareup.sdk.reader:reader-sdk-internals:1.0.1'
 }
   

@@ -2,24 +2,23 @@
 #import "RNReactNativeSquarePaysdk.h"
 
 @interface RNReactNativeSquarePaysdk() {
-    NSUInteger tenderType;
+    //  NSUInteger tenderType;
+    RCTACPaymentDelegate* paymentDelegate;
+    RCTACReaderSettingsDelegate* presentDelegate;
 }
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) AVAudioSession *audioSession;
 @end
 
-@implementation RCTConvert (PaySDKTransactionRequestTenderTypes)
+@implementation RCTConvert (SQRDReaderSDKTransactionRequestTenderTypes)
 
-RCT_ENUM_CONVERTER(PaySDKTransactionRequestTenderTypes,
+RCT_ENUM_CONVERTER(SQRDAdditionalPaymentTypes,
                    (@{
-                      @"PaySDKTransactionRequestTenderTypeAll": @(PaySDKTransactionRequestTenderTypeAll),
-                      @"PaySDKTransactionRequestTenderTypeCardFromReader": @(PaySDKTransactionRequestTenderTypeCardFromReader),
-                      @"PaySDKTransactionRequestTenderTypeKeyedInCard": @(PaySDKTransactionRequestTenderTypeKeyedInCard),
-                      @"PaySDKTransactionRequestTenderTypeCash": @(PaySDKTransactionRequestTenderTypeCash),
-                      @"PaySDKTransactionRequestTenderTypeOther": @(PaySDKTransactionRequestTenderTypeOther),
-                      @"PaySDKTransactionRequestTenderTypeSquareGiftCard": @(PaySDKTransactionRequestTenderTypeSquareGiftCard),
-                      @"PaySDKTransactionRequestTenderTypeCardOnFile": @(PaySDKTransactionRequestTenderTypeCardOnFile),
-                      }), PaySDKTransactionRequestTenderTypeAll, integerValue)
+                      @"SQRDAdditionalPaymentTypeManualCardEntry": @(SQRDAdditionalPaymentTypeManualCardEntry),
+                      @"SQRDAdditionalPaymentTypeCash": @(SQRDAdditionalPaymentTypeCash),
+                      @"SQRDAdditionalPaymentTypeOther": @(SQRDAdditionalPaymentTypeOther),
+                      }), SQRDAdditionalPaymentTypeManualCardEntry, integerValue)
+
 
 @end
 
@@ -28,28 +27,36 @@ RCT_ENUM_CONVERTER(PaySDKTransactionRequestTenderTypes,
 @synthesize locationManager;
 @synthesize audioSession;
 @synthesize paySDK;
-@synthesize flowConfig;
+@synthesize defaultPaymentParams;
 
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
-}
 
 RCT_EXPORT_MODULE()
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setupSquareInstance];
+    }
+    return self;
+}
+
+#pragma mark - REACT NATIVE UTIL METHODS:
+
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
 
 - (NSDictionary *)constantsToExport
 {
     return @{
-             @"PaySDKTransactionRequestTenderTypeAll": @(PaySDKTransactionRequestTenderTypeAll),
-             @"PaySDKTransactionRequestTenderTypeCardFromReader": @(PaySDKTransactionRequestTenderTypeCardFromReader),
-             @"PaySDKTransactionRequestTenderTypeKeyedInCard": @(PaySDKTransactionRequestTenderTypeKeyedInCard),
-             @"PaySDKTransactionRequestTenderTypeCash": @(PaySDKTransactionRequestTenderTypeCash),
-             @"PaySDKTransactionRequestTenderTypeOther": @(PaySDKTransactionRequestTenderTypeOther),
-             @"PaySDKTransactionRequestTenderTypeSquareGiftCard": @(PaySDKTransactionRequestTenderTypeSquareGiftCard),
-             @"PaySDKTransactionRequestTenderTypeCardOnFile": @(PaySDKTransactionRequestTenderTypeCardOnFile),
+             @"SQRDAdditionalPaymentTypeManualCardEntry": @(SQRDAdditionalPaymentTypeManualCardEntry),
+             @"SQRDAdditionalPaymentTypeCash": @(SQRDAdditionalPaymentTypeCash),
+             @"SQRDAdditionalPaymentTypeOther": @(SQRDAdditionalPaymentTypeOther),
              };
 }
+
 
 #pragma mark -
 #pragma mark requestPermissions()

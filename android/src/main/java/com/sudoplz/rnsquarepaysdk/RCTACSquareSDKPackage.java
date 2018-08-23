@@ -1,8 +1,6 @@
 
 package com.sudoplz.rnsquarepaysdk;
 
-import android.app.Application;
-
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -17,7 +15,7 @@ import java.util.List;
  * Created by Dynopia on 30/03/2018.
  */
 
-public class RNReactNativeSquarePaysdkPackage implements ReactPackage {
+public class RCTACSquareSDKPackage implements ReactPackage {
 
 
     /**
@@ -27,7 +25,7 @@ public class RNReactNativeSquarePaysdkPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(
-            new RNReactNativeSquarePaysdkModule(reactContext)
+            new RCTACSquareSDKModule(reactContext)
         );
     }
 
