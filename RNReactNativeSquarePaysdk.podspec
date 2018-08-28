@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "sudoplz@gmail.com" }
   s.platform = :ios, "8.0"
-  s.source       = { :git => "https://github.com/SudoPlz/react-native-square-readerSDK.git", :tag => "master" }
+  s.source       = { :git => "https://github.com/SudoPlz/react-native-sp-reader-sdk.git", :tag => "master" }
   s.source_files = "ios/*.{h,m}"
   s.requires_arc = true
 

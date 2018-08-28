@@ -1,5 +1,5 @@
 
-# react-native-square-readerSDK
+# react-native-sp-reader-sdk
 
 
 ## Dependencies
@@ -8,13 +8,13 @@
 
 ## Installation
 
-`npm i react-native-square-readerSDK --save`
+`npm i react-native-sp-reader-sdk --save`
 
 
 
 #### iOS installation
 
-1. Add the following line to your "Podfile": `pod 'react-native-square-readerSDK', path: '../node_modules/react-native-square-readerSDK'`
+1. Add the following line to your "Podfile": `pod 'react-native-sp-reader-sdk', path: '../node_modules/react-native-sp-reader-sdk'`
 2. run `pod install`
 3. Follow all the instructions needed to install ReaderSDK both for [iOS](https://docs.connect.squareup.com/payments/readersdk/setup-ios)
 
@@ -43,15 +43,15 @@
 2. Append the following lines to `android/settings.gradle`:
 
     ```gradle
-    include ':react-native-square-readerSDK'
-    project(':react-native-square-readerSDK').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-square-readerSDK/android')
+    include ':react-native-sp-reader-sdk'
+    project(':react-native-sp-reader-sdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sp-reader-sdk/android')
     ```
 
 3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
 
     ```gradle
     compile 'com.square:pay-sdk:latest' // native sdk of readerSDK (once it goes live)
-    compile project(':react-native-square-readerSDK') // our react-native module
+    compile project(':react-native-sp-reader-sdk') // our react-native module
     ```
 
 ...
@@ -62,7 +62,7 @@
 
   ```javascript
 
-  import ReaderSDK from 'react-native-square-readerSDK';
+  import ReaderSDK from 'react-native-sp-reader-sdk';
 
   ```
 

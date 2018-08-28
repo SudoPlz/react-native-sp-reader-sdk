@@ -1,6 +1,6 @@
 
 {
-  "name": "react-native-square-readerSDK",
+  "name": "react-native-sp-reader-sdk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SudoPlz/react-native-square-readerSDK.git"
+    "url": "git+https://github.com/SudoPlz/react-native-sp-reader-sdk.git"
   },
   "license": "",
   "peerDependencies": {
     "react-native": ">=0.40"
-  },
+  }
 }
