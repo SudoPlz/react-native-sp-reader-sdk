@@ -58,6 +58,16 @@
 
 4. Follow all the instructions needed to install ReaderSDK for [Android](https://docs.connect.squareup.com/payments/readersdk/setup-android)
 
+5. Go in ~/.gradle/gradle.properties and create 2 values:
+
+```
+SQUARE_REPO_USERNAME=WHATEVER_YOUR_SQUARE_USERNAME_IS
+SQUARE_REPO_PASSWORD=WHATEVER_YOUR_SQUARE_PASSWORD_IS
+```
+
+That way Android will know how to pull the ReaderSDK dependency
+
+
 ## Usage 
 
   ```javascript
