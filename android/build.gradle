@@ -65,8 +65,8 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    implementation ("com.squareup.sdk.reader:reader-sdk-${getEnvValueForKey("SQUARE_REPO_USERNAME")}:1.0.1")
+    implementation ("com.squareup.sdk.reader:reader-sdk-${getEnvValueForKey("SQUARE_REPO_USERNAME")}:1.0.3")
 
-    runtimeOnly 'com.squareup.sdk.reader:reader-sdk-internals:1.0.1'
+    runtimeOnly 'com.squareup.sdk.reader:reader-sdk-internals:1.0.3'
 }
   
