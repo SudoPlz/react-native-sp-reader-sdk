@@ -58,7 +58,8 @@
 
 4. Follow all the instructions needed to install ReaderSDK for [Android](https://docs.connect.squareup.com/payments/readersdk/setup-android)
 
-5. Go in ~/.gradle/gradle.properties and create 2 values:
+5. Go in `~/.gradle/gradle.properties` (or `C:\Users\username\.gradle\gradle.properties
+` if on Windows) and create 2 values:
 
 ```
 SQUARE_REPO_USERNAME=WHATEVER_YOUR_SQUARE_USERNAME_IS
