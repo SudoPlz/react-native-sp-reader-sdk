@@ -27,7 +27,7 @@
   - Add 
 
     ```java
-    import com.sudoplz.rnsquarereaderSDK.RNReactNativeSquarereaderSDKPackage;
+    import com.sudoplz.rnsquarereaderSDK.RCTACSquareSDKPackage;
     ```
 
    to the imports at the top of the file.
@@ -35,7 +35,7 @@
   - Add 
 
     ```java
-    new RNReactNativeSquarereaderSDKPackage(),
+    new RCTACSquareSDKPackage(),
     ``` 
 
   to the list returned by the `getPackages()` method
