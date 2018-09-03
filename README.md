@@ -27,7 +27,7 @@
   - Add 
 
     ```java
-    import com.sudoplz.rnsquarereaderSDK.RCTACSquareSDKPackage;
+    import com.sudoplz.rnsquarepaysdk.RCTACSquareSDKPackage;
     ```
 
    to the imports at the top of the file.
