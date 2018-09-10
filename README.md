@@ -8,66 +8,7 @@
 
 ## Installation
 
-`npm i react-native-sp-reader-sdk --save`
-
-
-
-#### iOS installation
-
-1. Add the following line to your "Podfile": `pod 'react-native-sp-reader-sdk', path: '../node_modules/react-native-sp-reader-sdk'`
-2. run `pod install`
-3. Follow all the instructions needed to install ReaderSDK both for [iOS](https://docs.connect.squareup.com/payments/readersdk/setup-ios)
-
-
-
-
-#### Android Manual installation
-
-1. Open up `android/app/src/main/java/[...]/MainApplication.java`
-  - Add 
-
-    ```java
-    import com.sudoplz.rnsquarepaysdk.RCTACSquareSDKPackage;
-    ```
-
-   to the imports at the top of the file.
-   
-  - Add 
-
-    ```java
-    new RCTACSquareSDKPackage(),
-    ``` 
-
-  to the list returned by the `getPackages()` method
-  
-2. Append the following lines to `android/settings.gradle`:
-
-    ```gradle
-    include ':react-native-sp-reader-sdk'
-    project(':react-native-sp-reader-sdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-sp-reader-sdk/android')
-    ```
-
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-
-    ```gradle
-    compile 'com.square:pay-sdk:latest' // native sdk of readerSDK (once it goes live)
-    compile project(':react-native-sp-reader-sdk') // our react-native module
-    ```
-
-...
-
-4. Follow all the instructions needed to install ReaderSDK for [Android](https://docs.connect.squareup.com/payments/readersdk/setup-android)
-
-5. Go in `~/.gradle/gradle.properties` (or `C:\Users\username\.gradle\gradle.properties
-` if on Windows) and create 2 values:
-
-```
-SQUARE_REPO_USERNAME=WHATEVER_YOUR_SQUARE_USERNAME_IS
-SQUARE_REPO_PASSWORD=WHATEVER_YOUR_SQUARE_PASSWORD_IS
-```
-
-That way Android will know how to pull the ReaderSDK dependency
-
+Check the [wiki](https://github.com/SudoPlz/react-native-sp-reader-sdk/wiki) for instructions.
 
 ## Usage 
 
