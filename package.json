@@ -1,11 +1,9 @@
-
 {
   "name": "react-native-sp-reader-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [
     "react-native"
   ],
