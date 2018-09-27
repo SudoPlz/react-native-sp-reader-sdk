@@ -1,6 +1,12 @@
 
 # react-native-sp-reader-sdk
 
+## This is a 3rd party module, but square just released their own implementation of an RN module
+
+So:
+- we will now be joining forces on that repo
+- You can now use the official Square RN module here --> https://github.com/square/react-native-square-reader-sdk
+
 
 ## Dependencies
 
